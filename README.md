@@ -1,50 +1,78 @@
-# Yabai Window Manager Pro (Alfred Workflow)
+# 🪟 Yabai Window Manager Pro
 
-![Yabai Logo](./workflow/icon.png)
+[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/tyou0/alfred_yabai/releases/latest)
+[![Platform](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-A high-performance, color-coded Alfred workflow for advanced window management on macOS using `yabai`.
-
-## 🚀 Installation & Requirement
-
-1.  **yabai**: Must be installed and running (`brew install koekeishiya/formulae/yabai`).
-2.  **Permissions**: Ensure `yabai` and `Alfred` have **Accessibility** permissions in *System Settings > Privacy & Security > Accessibility*.
-3.  **Import**: Double-click [Yabai_Window_Manager_Pro.alfredworkflow](./Yabai_Window_Manager_Pro.alfredworkflow) to install.
-
-## ⌨️ Hotkey Overview
-
-All shortcuts use the **Hyper Key** combination (`Cmd + Alt + Ctrl` and optionally `Shift`).
-
-### Quarters (4 Corners)
-- ↖️ `Hyper + U`: Top-Left Quarter
-- ↗️ `Hyper + I`: Top-Right Quarter
-- ↙️ `Hyper + J`: Bottom-Left Quarter
-- ↘️ `Hyper + K`: Bottom-Right Quarter
-
-### Standard Layouts
-- ⬅️ `Hyper + Left`: Left Half
-- ➡️ `Hyper + Right`: Right Half
-- ⬆️ `Hyper + Up`: Maximize Window (Smart Toggle)
-- ⬇️ `Hyper + Down`: Move to Next Display
-
-### Advanced Splits (Hyper + Shift)
-- `1`: Left Third
-- `2`: Center Third
-- `3`: Right Third
-- `4`: Center 2/3rds
-- `5`: **Smart Reset** (Un-maximize, Un-float, and Balance)
-
-## 🔍 Search & Command Palette
-Type `wm` in Alfred to access the full command palette with fuzzy search. This includes advanced space transformations:
-- **Space Layouts**: 🧱 BSP, 📚 Stack, 🎈 Float.
-- **Transform**: 🪞 Mirror (X/Y), 🔄 Rotate 90°.
-- **Navigation**: Focus & Swap windows in any direction.
-
-## 🎨 Visual Guide (Alfred Editor)
-The workflow blocks are color-coded for easy maintenance:
-- 🟢 **Green**: Horizontal/Vertical Splits (Halves, Thirds).
-- 🔵 **Blue**: Display Navigation & Quarters.
-- 🟡 **Yellow**: Window State (Floating, Sticky, Centering).
-- 🟠 **Orange**: Control Actions (Maximize, Reset, Layouts).
+A premium, high-performance Alfred workflow for advanced window management on macOS, powered by the `yabai` tiling window manager.
 
 ---
-*Powered by Yabai. Rebranded with the official logo.*
+
+## 📦 Download Latest
+**[Download Yabai_Window_Manager_Pro.alfredworkflow](https://github.com/tyou0/alfred_yabai/releases/latest/download/Yabai_Window_Manager_Pro.alfredworkflow)**
+
+---
+
+## 🚀 Requirements & Setup
+
+Before installing, ensure you have the following requirements met:
+
+1.  **yabai**: Must be installed and running.
+    ```bash
+    brew install koekeishiya/formulae/yabai
+    yabai --start-service
+    ```
+2.  **Accessibility**: Grant permissions in *System Settings > Privacy & Security > Accessibility* for both **yabai** and **Alfred**.
+3.  **Scripting Addition**: (Optional but recommended) For full functionality, enable the yabai scripting addition.
+
+---
+
+## ⌨️ Pro Shortcuts (Hyper Key)
+All shortcuts use the **Hyper Key** (`Cmd + Alt + Ctrl`).
+
+### 🧱 Standard Layouts
+| Action | Shortcut |
+| :--- | :--- |
+| **Left Half** | `Hyper + ←` |
+| **Right Half** | `Hyper + →` |
+| **Maximize** (Tgl) | `Hyper + ↑` |
+| **Next Display** | `Hyper + ↓` |
+| **Center Window** | `Hyper + C` |
+
+### 📐 Precision Splits (Shift)
+| Action | Shortcut |
+| :--- | :--- |
+| **Left Third** | `Hyper + Shift + 1` |
+| **Center Third** | `Hyper + Shift + 2` |
+| **Right Third** | `Hyper + Shift + 3` |
+| **Center 2/3rds** | `Hyper + Shift + 4` |
+| **Reset & Balance**| `Hyper + Shift + 5` |
+
+### 🧭 Quarter Positioning
+| Action | Shortcut |
+| :--- | :--- |
+| **Top Left** | `Hyper + U` |
+| **Top Right** | `Hyper + I` |
+| **Bottom Left** | `Hyper + J` |
+| **Bottom Right** | `Hyper + K` |
+
+---
+
+## 🔍 Command Palette
+Type `wm` in Alfred to trigger the fuzzy search command palette. 
+
+- **Layouts**: Switch between `BSP`, `Stack`, and `Float`.
+- **Toggles**: Enable `Sticky` or `Floating` states.
+- **Transform**: Mirror (X/Y) or Rotate 90°.
+- **Balanced Navigation**: Balance your current space or focus specific windows.
+
+---
+
+## 🛠️ Developer Guide
+To create a new release:
+1. Update version in `workflow/info.plist`.
+2. Commit changes: `git add . && git commit -m "feat: new features"`.
+3. Run release script: `./release.sh`.
+
+---
+*Created with ❤️ for macOS power users.*

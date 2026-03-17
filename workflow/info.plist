@@ -7,7 +7,7 @@
 	<key>category</key>
 	<string>Tools</string>
 	<key>version</key>
-	<string>1.1.0</string>
+	<string>1.1.1</string>
 	<key>connections</key>
 	<dict>
 		<key>HK_LEFT</key>
@@ -1413,25 +1413,26 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Yabai Window Manager Pro
-A precision window management workflow for macOS, powered by yabai.
+	<string># Yabai Window Manager Pro (v1.1.1)
 
-## Visual Guide (Color Coding)
-- 🟢 **Green (4)**: Splits &amp; Ratios (Halves, Thirds, 2/3rds)
-- 🔵 **Blue (6)**: Screens &amp; Quarters
-- 🟡 **Yellow (3)**: Window Logic (Floating, Sticky, Centering)
-- 🟠 **Orange (2)**: Space &amp; Layout Control (Maximize, Balance, Rotate, BSP/Stack/Float)
+A high-performance window management suite for macOS, powered by yabai.
 
-## Keyboard Shortcuts
-- **Modifier**: `Cmd + Alt + Ctrl` (Hyper)
-- **Arrows**: Left/Right Half, Maximize (Up), Next Screen (Down)
-- **Numbers 1-5**: Thirds, 2/3rds, Reset/Balance
-- **U/I/J/K**: Corner Quarters (Top Left, Top Right, etc.)
-- **C/F/S**: Center, Float, Sticky
-- **B/R**: Balance Space, Rotate 90°
+## 🚀 Setup
+1. Ensure `yabai` is running (`brew install yabai`).
+2. Grant Accessibility permissions to `yabai` and `Alfred`.
 
-## Performance Note
-Always ensure `yabai` is running and accessibility permissions are granted.</string>
+## ⌨️ Hyper Shortcuts (Cmd+Alt+Ctrl)
+- **Arrows**: Left/Right Half, Maximize (Up), Next Screen (Down).
+- **Numbers (Shift)**: Thirds (1-3), Center 2/3rds (4), Reset (5).
+- **Quarters**: U/I/J/K (Corners).
+- **Logic**: C (Center), F (Float), S (Sticky).
+- **Control**: B (Balance), R (Rotate).
+
+## 🔍 Command Palette
+Type `wm` to fuzzy search all commands, including space layouts (BSP/Stack/Float) and window transformations.
+
+---
+*Visit https://github.com/tyou0/alfred_yabai for updates.*</string>
 	<key>uidata</key>
 	<dict>
 		<key>EXEC_SCRIPT</key>

@@ -320,6 +320,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>HK_LEFT_2_3RDS</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EXEC_SCRIPT</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>HK_RIGHT_2_3RDS</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EXEC_SCRIPT</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>WM_FILTER</key>
 		<array>
 			<dict>
@@ -685,6 +711,80 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
+				<string>left_two_thirds</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Left 2/3rds</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_LEFT_2_3RDS</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Horizontal: Left 2/3rds</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>right_two_thirds</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Right 2/3rds</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_RIGHT_2_3RDS</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Horizontal: Right 2/3rds</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
 				<string>reset_window</string>
 				<key>focusedappvariable</key>
 				<false/>
@@ -851,7 +951,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>Fetching options...</string>
 				<key>script</key>
 				<string>./wm.sh</string>
 				<key>scriptargtype</key>
@@ -859,7 +959,7 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Manage windows with yabai</string>
+				<string>Type to search for window management commands</string>
 				<key>title</key>
 				<string>Window Manager</string>
 				<key>type</key>
@@ -903,203 +1003,16 @@
 			<key>note</key>
 			<string>Main execution script for yabai commands</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>left_two_thirds</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>left 2/3</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_LEFT_2_3RDS</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>right_two_thirds</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>right 2/3</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_RIGHT_2_3RDS</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>top_left</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>top left</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_TOP_LEFT</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>top_right</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>top right</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_TOP_RIGHT</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>bottom_left</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>bottom left</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_BOTTOM_LEFT</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>bottom_right</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>bottom right</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_BOTTOM_RIGHT</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>sticky</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>sticky</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_STICKY</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>layout_bsp</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>BSP</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_LAYOUT_BSP</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>layout_stack</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>Stack</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_LAYOUT_STACK</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>layout_float</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-				<key>customname</key>
-				<string>Float</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ARG_LAYOUT_FLOAT</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
+
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>top_left</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -1117,7 +1030,7 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Top Left</string>
+				<string>Top Left Quarter</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -1134,7 +1047,9 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>top_right</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -1152,7 +1067,7 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Top Right</string>
+				<string>Top Right Quarter</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -1169,7 +1084,9 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>bottom_left</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -1187,7 +1104,7 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Bottom Left</string>
+				<string>Bottom Left Quarter</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -1204,7 +1121,9 @@
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>bottom_right</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -1222,10 +1141,9 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Bottom Right</string>
+				<string>Bottom Right Quarter</string>
 			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<key>type</key>			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>HK_BOTTOM_RIGHT</string>
 			<key>version</key>
@@ -1233,442 +1151,540 @@
 			<key>note</key>
 			<string>Quarter: Bottom Right</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>float</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>3</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>F</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Toggle Float</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_FLOAT</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Window: Toggle Float</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>sticky</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Toggle Sticky</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_STICKY</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Window: Toggle Sticky</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>balance</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>11</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>B</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Balance Space</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_BALANCE</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Space: Balance</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>rotate</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>15</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>R</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Rotate 90</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_ROTATE</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Space: Rotate</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>layout_bsp</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>18</integer>
+				<key>hotmod</key>
+				<integer>1310720</integer>
+				<key>hotstring</key>
+				<string>1</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Layout: BSP</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_LAYOUT_BSP</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Layout: BSP</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>layout_stack</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>19</integer>
+				<key>hotmod</key>
+				<integer>1310720</integer>
+				<key>hotstring</key>
+				<string>2</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Layout: Stack</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_LAYOUT_STACK</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Layout: Stack</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>layout_float</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>20</integer>
+				<key>hotmod</key>
+				<integer>1310720</integer>
+				<key>hotstring</key>
+				<string>3</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+				<key>customname</key>
+				<string>Layout: Float</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>HK_LAYOUT_FLOAT</string>
+			<key>version</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Layout: Float</string>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Yabai Window Manager Pro
-A comprehensive window management workflow for macOS using yabai.
+A precision window management workflow for macOS, powered by yabai.
 
-## Visual Guide (Colors)
-- 🟢 **Green**: Horizontal/Vertical Splits (Halves, Thirds, 2/3rds)
-- 🔵 **Blue**: Screen selection &amp; Quarters
-- 🟡 **Yellow**: Window state (Floating, Sticky, Centering)
-- 🟠 **Orange**: Space Control (Maximize, Balance, Layouts)
+## Visual Guide (Color Coding)
+- 🟢 **Green (4)**: Splits &amp; Ratios (Halves, Thirds, 2/3rds)
+- 🔵 **Blue (6)**: Screens &amp; Quarters
+- 🟡 **Yellow (3)**: Window Logic (Floating, Sticky, Centering)
+- 🟠 **Orange (2)**: Space &amp; Layout Control (Maximize, Balance, Rotate, BSP/Stack/Float)
 
-## Features
-- All standard halves/thirds.
-- Advanced 2/3rds and Quarters.
-- Floating and Sticky toggles.
-- Balance and Cycle Rotate.
-- Space Layout switching (BSP, Float, Stack).
-- Display management (Next/Prev display).
+## Keyboard Shortcuts
+- **Modifier**: `Cmd + Alt + Ctrl` (Hyper)
+- **Arrows**: Left/Right Half, Maximize (Up), Next Screen (Down)
+- **Numbers 1-5**: Thirds, 2/3rds, Reset/Balance
+- **U/I/J/K**: Corner Quarters (Top Left, Top Right, etc.)
+- **C/F/S**: Center, Float, Sticky
+- **B/R**: Balance Space, Rotate 90°
 
-## Troubleshooting "Maximize"
-If native zoom doesn't work, this workflow falls back to a 100% grid. Ensure `yabai` has Accessibility permissions in System Settings.</string>
+## Performance Note
+Always ensure `yabai` is running and accessibility permissions are granted.</string>
 	<key>uidata</key>
 	<dict>
 		<key>EXEC_SCRIPT</key>
 		<dict>
-			<key>xpos</key>
-			<integer>550</integer>
-			<key>ypos</key>
-			<integer>300</integer>
 			<key>colorindex</key>
 			<integer>9</integer>
+			<key>xpos</key>
+			<integer>600</integer>
+			<key>ypos</key>
+			<integer>400</integer>
 		</dict>
 		<key>WM_FILTER</key>
 		<dict>
-			<key>xpos</key>
-			<integer>50</integer>
-			<key>ypos</key>
-			<integer>800</integer>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>11</integer>
+			<key>xpos</key>
+			<integer>400</integer>
+			<key>ypos</key>
+			<integer>400</integer>
 		</dict>
+
 		<key>HK_LEFT</key>
 		<dict>
-			<key>note</key>
-			<string>Move window to left half</string>
+			<key>colorindex</key>
+			<integer>4</integer>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>50</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
 		</dict>
 		<key>HK_RIGHT</key>
 		<dict>
-			<key>note</key>
-			<string>Move window to right half</string>
+			<key>colorindex</key>
+			<integer>4</integer>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>150</integer>
+		</dict>
+		<key>HK_LEFT_3RD</key>
+		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
-		</dict>
-		<key>HK_MAXIMIZE</key>
-		<dict>
-			<key>note</key>
-			<string>Maximize window (fullscreen toggle)</string>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>250</integer>
-			<key>colorindex</key>
-			<integer>2</integer>
 		</dict>
-		<key>HK_NEXT</key>
+		<key>HK_CENTER_3RD</key>
 		<dict>
-			<key>note</key>
-			<string>Move window to next screen</string>
+			<key>colorindex</key>
+			<integer>4</integer>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>350</integer>
-			<key>colorindex</key>
-			<integer>6</integer>
 		</dict>
-		<key>HK_PREV</key>
+		<key>HK_RIGHT_3RD</key>
 		<dict>
-			<key>note</key>
-			<string>Move window to previous screen</string>
+			<key>colorindex</key>
+			<integer>4</integer>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>450</integer>
-			<key>colorindex</key>
-			<integer>6</integer>
 		</dict>
-		<key>HK_LEFT_3RD</key>
+		<key>HK_CENTER_2_3RDS</key>
 		<dict>
-			<key>note</key>
-			<string>Move window to left third</string>
+			<key>colorindex</key>
+			<integer>4</integer>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>550</integer>
+		</dict>
+		<key>HK_LEFT_2_3RDS</key>
+		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
-		</dict>
-		<key>HK_CENTER_3RD</key>
-		<dict>
-			<key>note</key>
-			<string>Move window to center third</string>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>650</integer>
+		</dict>
+		<key>HK_RIGHT_2_3RDS</key>
+		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
-		</dict>
-		<key>HK_RIGHT_3RD</key>
-		<dict>
-			<key>note</key>
-			<string>Move window to right third</string>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
 			<integer>750</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>HK_RESET</key>
-		<dict>
-			<key>note</key>
-			<string>Reset window balance</string>
-			<key>xpos</key>
-			<integer>450</integer>
-			<key>ypos</key>
-			<integer>50</integer>
-			<key>colorindex</key>
-			<integer>2</integer>
 		</dict>
 		<key>HK_TOP_HALF</key>
 		<dict>
-			<key>note</key>
-			<string>Move window to top half</string>
-			<key>xpos</key>
-			<integer>450</integer>
-			<key>ypos</key>
-			<integer>150</integer>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>4</integer>
+			<key>xpos</key>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>850</integer>
 		</dict>
 		<key>HK_BOTTOM_HALF</key>
 		<dict>
-			<key>note</key>
-			<string>Move window to bottom half</string>
+			<key>colorindex</key>
+			<integer>4</integer>
 			<key>xpos</key>
-			<integer>450</integer>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>950</integer>
+		</dict>
+		<key>HK_TOP_LEFT</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>50</integer>
+		</dict>
+		<key>HK_TOP_RIGHT</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>150</integer>
+		</dict>
+		<key>HK_BOTTOM_LEFT</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<integer>150</integer>
 			<key>ypos</key>
 			<integer>250</integer>
+		</dict>
+		<key>HK_BOTTOM_RIGHT</key>
+		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>6</integer>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>350</integer>
+		</dict>
+		<key>HK_NEXT</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>450</integer>
+		</dict>
+		<key>HK_PREV</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>550</integer>
+		</dict>
+		<key>HK_FLOAT</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<integer>800</integer>
+			<key>ypos</key>
+			<integer>50</integer>
+		</dict>
+		<key>HK_STICKY</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<integer>800</integer>
+			<key>ypos</key>
+			<integer>150</integer>
 		</dict>
 		<key>HK_CENTER_WIN</key>
 		<dict>
-			<key>note</key>
-			<string>Center window on screen</string>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<integer>450</integer>
+			<integer>800</integer>
+			<key>ypos</key>
+			<integer>250</integer>
+		</dict>
+		<key>HK_LAYOUT_BSP</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<integer>800</integer>
 			<key>ypos</key>
 			<integer>350</integer>
-			<key>colorindex</key>
-			<integer>3</integer>
 		</dict>
-		<key>HK_CENTER_2_3RDS</key>
+		<key>HK_LAYOUT_STACK</key>
 		<dict>
-			<key>note</key>
-			<string>Center two thirds</string>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<integer>450</integer>
+			<integer>800</integer>
 			<key>ypos</key>
 			<integer>450</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
 		</dict>
-		<key>ARG_LEFT</key>
+		<key>HK_LAYOUT_FLOAT</key>
 		<dict>
-			<key>note</key>
-			<string>left</string>
-			<key>xpos</key>
-			<integer>250</integer>
-			<key>ypos</key>
-			<integer>80</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_RIGHT</key>
-		<dict>
-			<key>note</key>
-			<string>right</string>
-			<key>xpos</key>
-			<integer>250</integer>
-			<key>ypos</key>
-			<integer>180</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_MAXIMIZE</key>
-		<dict>
-			<key>note</key>
-			<string>maximize</string>
-			<key>xpos</key>
-			<integer>250</integer>
-			<key>ypos</key>
-			<integer>280</integer>
 			<key>colorindex</key>
 			<integer>2</integer>
-		</dict>
-		<key>ARG_NEXT</key>
-		<dict>
-			<key>note</key>
-			<string>next_screen</string>
 			<key>xpos</key>
-			<integer>250</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>380</integer>
-			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>550</integer>
 		</dict>
-		<key>ARG_PREV</key>
+		<key>HK_MAXIMIZE</key>
 		<dict>
-			<key>note</key>
-			<string>prev_screen</string>
-			<key>xpos</key>
-			<integer>250</integer>
-			<key>ypos</key>
-			<integer>480</integer>
-			<key>colorindex</key>
-			<integer>6</integer>
-		</dict>
-		<key>ARG_LEFT_3RD</key>
-		<dict>
-			<key>note</key>
-			<string>left_third</string>
-			<key>xpos</key>
-			<integer>250</integer>
-			<key>ypos</key>
-			<integer>580</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_CENTER_3RD</key>
-		<dict>
-			<key>note</key>
-			<string>center_third</string>
-			<key>xpos</key>
-			<integer>250</integer>
-			<key>ypos</key>
-			<integer>680</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_RIGHT_3RD</key>
-		<dict>
-			<key>note</key>
-			<string>right_third</string>
-			<key>xpos</key>
-			<integer>250</integer>
-			<key>ypos</key>
-			<integer>780</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_RESET</key>
-		<dict>
-			<key>note</key>
-			<string>reset_window</string>
-			<key>xpos</key>
-			<integer>650</integer>
-			<key>ypos</key>
-			<integer>80</integer>
-			<key>colorindex</key>
-			<integer>2</integer>
-		</dict>
-		<key>ARG_TOP_HALF</key>
-		<dict>
-			<key>note</key>
-			<string>top_half</string>
-			<key>xpos</key>
-			<integer>650</integer>
-			<key>ypos</key>
-			<integer>180</integer>
 			<key>colorindex</key>
 			<integer>5</integer>
-		</dict>
-		<key>ARG_BOTTOM_HALF</key>
-		<dict>
-			<key>note</key>
-			<string>bottom_half</string>
 			<key>xpos</key>
-			<integer>650</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>280</integer>
+			<integer>650</integer>
+		</dict>
+		<key>HK_BALANCE</key>
+		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
-		</dict>
-		<key>ARG_CENTER_WIN</key>
-		<dict>
-			<key>note</key>
-			<string>center_window</string>
 			<key>xpos</key>
-			<integer>650</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>380</integer>
-			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>750</integer>
 		</dict>
-		<key>ARG_CENTER_2_3RDS</key>
+		<key>HK_ROTATE</key>
 		<dict>
-			<key>note</key>
-			<string>center_two_thirds</string>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
-			<integer>650</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>480</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_LEFT_2_3RDS</key>
-		<dict>
-			<key>note</key>
-			<string>left_two_thirds</string>
-			<key>xpos</key>
-			<integer>650</integer>
-			<key>ypos</key>
-			<integer>580</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_RIGHT_2_3RDS</key>
-		<dict>
-			<key>note</key>
-			<string>right_two_thirds</string>
-			<key>xpos</key>
-			<integer>650</integer>
-			<key>ypos</key>
-			<integer>680</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_TOP_LEFT</key>
-		<dict>
-			<key>note</key>
-			<string>top_left</string>
-			<key>xpos</key>
 			<integer>850</integer>
-			<key>ypos</key>
-			<integer>80</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
 		</dict>
-		<key>ARG_TOP_RIGHT</key>
+		<key>HK_RESET</key>
 		<dict>
-			<key>note</key>
-			<string>top_right</string>
-			<key>xpos</key>
-			<integer>850</integer>
-			<key>ypos</key>
-			<integer>180</integer>
 			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_BOTTOM_LEFT</key>
-		<dict>
-			<key>note</key>
-			<string>bottom_left</string>
+			<integer>5</integer>
 			<key>xpos</key>
-			<integer>850</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>280</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_BOTTOM_RIGHT</key>
-		<dict>
-			<key>note</key>
-			<string>bottom_right</string>
-			<key>xpos</key>
-			<integer>850</integer>
-			<key>ypos</key>
-			<integer>380</integer>
-			<key>colorindex</key>
-			<integer>4</integer>
-		</dict>
-		<key>ARG_STICKY</key>
-		<dict>
-			<key>note</key>
-			<string>sticky_toggle</string>
-			<key>xpos</key>
-			<integer>850</integer>
-			<key>ypos</key>
-			<integer>480</integer>
-			<key>colorindex</key>
-			<integer>3</integer>
-		</dict>
-		<key>ARG_LAYOUT_BSP</key>
-		<dict>
-			<key>note</key>
-			<string>layout_bsp</string>
-			<key>xpos</key>
-			<integer>1050</integer>
-			<key>ypos</key>
-			<integer>80</integer>
-			<key>colorindex</key>
-			<integer>2</integer>
-		</dict>
-		<key>ARG_LAYOUT_STACK</key>
-		<dict>
-			<key>note</key>
-			<string>layout_stack</string>
-			<key>xpos</key>
-			<integer>1050</integer>
-			<key>ypos</key>
-			<integer>180</integer>
-			<key>colorindex</key>
-			<integer>2</integer>
-		</dict>
-		<key>ARG_LAYOUT_FLOAT</key>
-		<dict>
-			<key>note</key>
-			<string>layout_float</string>
-			<key>xpos</key>
-			<integer>1050</integer>
-			<key>ypos</key>
-			<integer>280</integer>
-			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>950</integer>
 		</dict>
 	</dict>
 </dict>

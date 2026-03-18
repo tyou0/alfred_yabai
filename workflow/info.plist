@@ -7,7 +7,7 @@
 	<key>category</key>
 	<string>Tools</string>
 	<key>version</key>
-	<string>1.1.1</string>
+	<string>1.1.2</string>
 	<key>connections</key>
 	<dict>
 		<key>HK_LEFT</key>

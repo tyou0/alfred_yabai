@@ -12,10 +12,46 @@ The project has no runtime dependencies beyond `bash`, `yabai`, and Alfred. JSON
 |---|---|
 | `./deploy.sh` | Package `workflow/` into `Yabai_Window_Manager_Pro.alfredworkflow` zip |
 | `./release.sh` | Deploy + create GitHub release with auto-generated changelog (requires `gh` CLI) |
+| `./install-hooks.sh` | Install the pre-commit hook for linting and formatting checks |
 | `bash -n workflow/execute.sh` | Syntax-check a script |
 | `bash -n workflow/wm.sh` | Syntax-check the Alfred Script Filter |
 | `shellcheck workflow/execute.sh` | Lint a shell script (install via `brew install shellcheck`) |
 | `bash workflow/execute.sh left` | Manual test — invoke an action directly |
+
+## Pre-Commit Hooks
+
+The project includes a pre-commit hook that automatically runs linting and formatting checks before allowing commits. This helps maintain code quality and consistency.
+
+### Installation
+
+Run the installation script once per clone:
+```bash
+./install-hooks.sh
+```
+
+The hook will be installed to `.git/hooks/pre-commit` and will run automatically on every commit.
+
+### Checks Performed
+
+The pre-commit hook verifies the following for all staged `.sh` files:
+
+1. **ShellCheck**: Runs `shellcheck` if available (install via `brew install shellcheck`)
+2. **Bash Syntax**: Validates syntax with `bash -n`
+3. **Shebang**: Ensures `#!/bin/bash` shebang is present
+4. **Safety Mode**: Verifies `set -euo pipefail` is present
+5. **Tabs**: Checks for tabs (requires 4-space indentation)
+6. **Trailing Whitespace**: Detects trailing whitespace on lines
+
+If any check fails, the commit will be blocked until the issues are resolved.
+
+### Skipping the Hook
+
+If you need to bypass the pre-commit checks temporarily:
+```bash
+git commit --no-verify -m "your message"
+```
+
+Use sparingly and only when absolutely necessary.
 
 ## Code Style Guidelines
 
@@ -61,6 +97,8 @@ The project has no runtime dependencies beyond `bash`, `yabai`, and Alfred. JSON
 | `workflow/icon.svg` | Workflow icon (vector) |
 | `deploy.sh` | Build packaging — zips `workflow/` into `.alfredworkflow` |
 | `release.sh` | GitHub release automation — requires `gh` CLI |
+| `install-hooks.sh` | Pre-commit hook installation script |
+| `hooks/pre-commit` | Pre-commit hook definition for linting and formatting |
 | `AGENTS.md` | This file — guidance for agentic coding tools |
 
 ## Naming Conventions

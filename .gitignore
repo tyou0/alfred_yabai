@@ -1,10 +1,12 @@
 # macOS
 .DS_Store
 
-# Built workflow artifact
+# Build artifacts
 *.alfredworkflow
 
-# Planning/scratch files
-task.md
-implementation_plan.md
-walkthrough.md
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

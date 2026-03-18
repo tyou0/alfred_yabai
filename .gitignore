@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Built workflow artifact
+*.alfredworkflow
+
+# Planning/scratch files
+task.md
+implementation_plan.md
+walkthrough.md

@@ -1,7 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 
 # Define variables
-PROJECT_DIR="/Users/tyou/src/alfred_yabai"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
 WORKFLOW_DIR="$PROJECT_DIR/workflow"
 EXPORT_NAME="Yabai_Window_Manager_Pro.alfredworkflow"
 EXPORT_PATH="$PROJECT_DIR/$EXPORT_NAME"
@@ -26,7 +28,7 @@ find . -name ".DS_Store" -delete
 echo "📦 Packaging workflow..."
 zip -rq "$EXPORT_PATH" . -x "*.DS_Store" "task.md" "implementation_plan.md" "walkthrough.md"
 
-if [ $? -eq 0 ]; then
+if [ -f "$EXPORT_PATH" ]; then
     echo "✅ Success! Workflow created at:"
     echo "   $EXPORT_PATH"
     echo "👉 Double-click that file to import into Alfred."

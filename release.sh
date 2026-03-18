@@ -1,7 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 
 # Configuration
-PROJECT_DIR="/Users/tyou/src/alfred_yabai"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
 WORKFLOW_INFO="$PROJECT_DIR/workflow/info.plist"
 EXPORT_NAME="Yabai_Window_Manager_Pro.alfredworkflow"
 EXPORT_PATH="$PROJECT_DIR/$EXPORT_NAME"
@@ -25,8 +27,7 @@ TAG="v$VERSION"
 echo "🔖 Preparing release for $TAG..."
 
 # Run deployment to get current artifact
-./deploy.sh
-if [ $? -ne 0 ]; then
+if ! ./deploy.sh; then
     echo "❌ Deployment failed. Aborting release."
     exit 1
 fi
@@ -57,12 +58,10 @@ echo -e "\n--- Release Notes ---\n$RELEASE_NOTES\n----------------------\n"
 
 # Create release
 echo "🚀 Creating GitHub release $TAG..."
-gh release create "$TAG" "$EXPORT_PATH" \
+if gh release create "$TAG" "$EXPORT_PATH" \
     --title "Release $TAG" \
     --notes "$(echo -e "$RELEASE_NOTES")" \
-    --latest
-
-if [ $? -eq 0 ]; then
+    --latest; then
     echo "✅ Success! Release $TAG is live."
     echo "🔗 View it at: $(gh release view "$TAG" --web 2>/dev/null || echo "GitHub")"
 else

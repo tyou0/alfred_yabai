@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Ensure we have a proper PATH for Alfred
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -137,4 +138,5 @@ case "$ACTION" in
   "swap_down")
     $YABAI -m window --swap south
     ;;
+  *) echo "Unknown action: $ACTION" >&2; exit 1 ;;
 esac

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Define the options
 declare -a options=(
@@ -51,15 +52,15 @@ for opt in "${options[@]}"; do
   if [ "$first" = false ]; then echo ','; fi
   echo '{'
   if [[ "$title" == "HEADER" ]]; then
-    echo "  \"title\": \"$arg\","
-    echo "  \"subtitle\": \"$subtitle\","
+    echo "  \"title\": \"$(echo "$arg" | sed 's/"/\\"/g')\","
+    echo "  \"subtitle\": \"$(echo "$subtitle" | sed 's/"/\\"/g')\","
     echo "  \"valid\": false,"
     echo "  \"icon\": { \"path\": \"icon.png\" }"
   else
-    echo "  \"title\": \"$title\","
-    echo "  \"subtitle\": \"$subtitle\","
-    echo "  \"arg\": \"$arg\","
-    echo "  \"autocomplete\": \"$title\","
+    echo "  \"title\": \"$(echo "$title" | sed 's/"/\\"/g')\","
+    echo "  \"subtitle\": \"$(echo "$subtitle" | sed 's/"/\\"/g')\","
+    echo "  \"arg\": \"$(echo "$arg" | sed 's/"/\\"/g')\","
+    echo "  \"autocomplete\": \"$(echo "$title" | sed 's/"/\\"/g')\","
     echo "  \"icon\": { \"path\": \"icon.png\" }"
   fi
   echo '}'

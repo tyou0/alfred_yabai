@@ -1,6 +1,6 @@
 # 🪟 Yabai Window Manager Pro
 
-[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/tyou0/alfred_yabai/releases/latest)
+[![Version](https://img.shields.io/badge/version-1.1.2-blue.svg)](https://github.com/tyou0/alfred_yabai/releases/latest)
 [![Platform](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -15,15 +15,49 @@ A premium, high-performance Alfred workflow for advanced window management on ma
 
 ## 🚀 Requirements & Setup
 
-Before installing, ensure you have the following requirements met:
+Importing the Alfred workflow is not enough on a new Mac. The workflow only sends commands to a running `yabai` service; it does not install `yabai`, start the service, or grant macOS permissions.
 
-1.  **yabai**: Must be installed and running.
+1.  **Install yabai**:
     ```bash
-    brew install koekeishiya/formulae/yabai
+    brew install yabai
+    ```
+2.  **Start the yabai service**:
+    ```bash
     yabai --start-service
     ```
-2.  **Accessibility**: Grant permissions in *System Settings > Privacy & Security > Accessibility* for both **yabai** and **Alfred**.
-3.  **Scripting Addition**: (Optional but recommended) For full functionality, enable the yabai scripting addition.
+3.  **Grant Accessibility permissions**:
+    Open *System Settings > Privacy & Security > Accessibility* and enable:
+    - **yabai** (`/opt/homebrew/bin/yabai` or `/usr/local/bin/yabai`)
+    - **Alfred**
+    - Your terminal app, if you want to test `yabai` commands from Terminal/iTerm
+4.  **Restart and verify yabai**:
+    ```bash
+    yabai --restart-service
+    yabai -m query --spaces
+    ```
+
+The final command must print JSON. If it prints `failed to connect to socket` or `could not access accessibility features`, the Alfred workflow will not be able to move windows yet.
+
+### Troubleshooting New Macs
+
+If `yabai -m query --spaces` fails:
+
+- Re-open *System Settings > Privacy & Security > Accessibility*, remove `yabai` if it is already listed, add it again, and enable it.
+- Restart the service:
+  ```bash
+  yabai --restart-service
+  ```
+- Check the service log:
+  ```bash
+  tail -80 /tmp/yabai_$USER.err.log
+  ```
+- Confirm Alfred also has Accessibility permission. Hotkeys launched by Alfred need Alfred permission as well as yabai permission.
+
+The `wm` command palette now shows a setup warning when `yabai` is missing or not accepting commands. Hotkey actions also show a macOS notification with the underlying `yabai` error.
+
+### Scripting Addition
+
+The yabai scripting addition is optional for this workflow. Some advanced yabai features need it, but the basic grid, focus, layout, and display commands should work once the service and Accessibility permissions are correct.
 
 ---
 

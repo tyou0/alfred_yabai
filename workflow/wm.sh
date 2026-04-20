@@ -1,6 +1,40 @@
 #!/bin/bash
 set -euo pipefail
 
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+json_escape() {
+    sed 's/\\/\\\\/g; s/"/\\"/g'
+}
+
+setup_item() {
+    local title="$1"
+    local subtitle="$2"
+
+    echo '{"items": ['
+    echo '{'
+    echo "  \"title\": \"$(echo "$title" | json_escape)\","
+    echo "  \"subtitle\": \"$(echo "$subtitle" | json_escape)\","
+    echo '  "valid": false,'
+    echo '  "icon": { "path": "icon.png" }'
+    echo '}'
+    echo ']}'
+}
+
+if ! YABAI=$(command -v yabai); then
+    setup_item \
+        "yabai is not installed" \
+        "Install yabai with Homebrew, then run: yabai --start-service"
+    exit 0
+fi
+
+if ! YABAI_STATUS=$("$YABAI" -m query --spaces 2>&1 >/dev/null); then
+    setup_item \
+        "yabai is not ready" \
+        "Grant Accessibility to yabai and Alfred, run: yabai --restart-service, then verify: yabai -m query --spaces. Error: $YABAI_STATUS"
+    exit 0
+fi
+
 # Define the options
 declare -a options=(
   "HEADER|--- RATIOS ---|Horizontal and Vertical screen splits"
@@ -52,15 +86,15 @@ for opt in "${options[@]}"; do
   if [ "$first" = false ]; then echo ','; fi
   echo '{'
   if [[ "$title" == "HEADER" ]]; then
-    echo "  \"title\": \"$(echo "$arg" | sed 's/"/\\"/g')\","
-    echo "  \"subtitle\": \"$(echo "$subtitle" | sed 's/"/\\"/g')\","
+    echo "  \"title\": \"$(echo "$arg" | json_escape)\","
+    echo "  \"subtitle\": \"$(echo "$subtitle" | json_escape)\","
     echo "  \"valid\": false,"
     echo "  \"icon\": { \"path\": \"icon.png\" }"
   else
-    echo "  \"title\": \"$(echo "$title" | sed 's/"/\\"/g')\","
-    echo "  \"subtitle\": \"$(echo "$subtitle" | sed 's/"/\\"/g')\","
-    echo "  \"arg\": \"$(echo "$arg" | sed 's/"/\\"/g')\","
-    echo "  \"autocomplete\": \"$(echo "$title" | sed 's/"/\\"/g')\","
+    echo "  \"title\": \"$(echo "$title" | json_escape)\","
+    echo "  \"subtitle\": \"$(echo "$subtitle" | json_escape)\","
+    echo "  \"arg\": \"$(echo "$arg" | json_escape)\","
+    echo "  \"autocomplete\": \"$(echo "$title" | json_escape)\","
     echo "  \"icon\": { \"path\": \"icon.png\" }"
   fi
   echo '}'

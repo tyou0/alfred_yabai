@@ -1413,13 +1413,31 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Yabai Window Manager Pro (v1.1.1)
+	<string># Yabai Window Manager Pro (v1.1.2)
 
 A high-performance window management suite for macOS, powered by yabai.
 
 ## 🚀 Setup
-1. Ensure `yabai` is running (`brew install yabai`).
-2. Grant Accessibility permissions to `yabai` and `Alfred`.
+Importing this Alfred workflow is not enough on a new Mac. The workflow sends commands to an already-running yabai service.
+
+1. Install yabai:
+   `brew install yabai`
+2. Start the service:
+   `yabai --start-service`
+3. Grant Accessibility permissions in System Settings > Privacy &amp; Security > Accessibility:
+   - yabai (`/opt/homebrew/bin/yabai` or `/usr/local/bin/yabai`)
+   - Alfred
+   - Terminal/iTerm if you test from a shell
+4. Restart and verify:
+   `yabai --restart-service`
+   `yabai -m query --spaces`
+
+The final command must print JSON. If it prints `failed to connect to socket` or `could not access accessibility features`, fix yabai first; Alfred cannot move windows until yabai accepts commands.
+
+Troubleshooting:
+- Remove and re-add yabai in Accessibility if permission looks enabled but commands still fail.
+- Check `/tmp/yabai_$USER.err.log`.
+- The `wm` palette shows setup warnings when yabai is missing or not ready.
 
 ## ⌨️ Hyper Shortcuts (Cmd+Alt+Ctrl)
 - **Arrows**: Left/Right Half, Maximize (Up), Next Screen (Down).

@@ -454,7 +454,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>maximize</string>
+				<string>prev_screen</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -472,7 +472,7 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Maximize</string>
+				<string>Prev Display</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -481,7 +481,7 @@
 			<key>version</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Window: Maximize</string>
+			<string>Screen: Previous Display</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1440,7 +1440,7 @@ Troubleshooting:
 - The `wm` palette shows setup warnings when yabai is missing or not ready.
 
 ## ⌨️ Hyper Shortcuts (Cmd+Alt+Ctrl)
-- **Arrows**: Left/Right Half, Maximize (Up), Next Screen (Down).
+- **Arrows**: Left/Right Half, Previous Display (Up), Next Display (Down).
 - **Numbers (Shift)**: Thirds (1-3), Center 2/3rds (4), Reset (5).
 - **Quarters**: U/I/J/K (Corners).
 - **Logic**: C (Center), F (Float), S (Sticky).

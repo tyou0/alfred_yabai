@@ -69,7 +69,7 @@ All shortcuts use the **Hyper Key** (`Cmd + Alt + Ctrl`).
 | :--- | :--- |
 | **Left Half** | `Hyper + ←` |
 | **Right Half** | `Hyper + →` |
-| **Maximize** (Tgl) | `Hyper + ↑` |
+| **Prev Display** | `Hyper + ↑` |
 | **Next Display** | `Hyper + ↓` |
 | **Center Window** | `Hyper + C` |
 

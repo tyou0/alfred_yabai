@@ -20,6 +20,32 @@ fail() {
     exit 1
 }
 
+move_window_to_display() {
+    local target_display="$1"
+    local fallback_display="$2"
+    local display_count
+    local target_display_index
+
+    display_count=$("$YABAI" -m query --displays | awk '/"index":/ { count++ } END { print count + 0 }')
+    if [ "$display_count" -lt 2 ]; then
+        fail "Only one display found. Connect another monitor before using next/previous display."
+    fi
+
+    if ! target_display_index=$("$YABAI" -m query --displays --display "$target_display" 2>/dev/null | sed -n 's/.*"index":[[:space:]]*\([0-9][0-9]*\).*/\1/p'); then
+        target_display_index=""
+    fi
+
+    if [ -z "$target_display_index" ]; then
+        target_display_index=$("$YABAI" -m query --displays --display "$fallback_display" 2>/dev/null | sed -n 's/.*"index":[[:space:]]*\([0-9][0-9]*\).*/\1/p')
+    fi
+
+    if [ -z "$target_display_index" ]; then
+        fail "No target display found."
+    fi
+
+    "$YABAI" -m window --display "$target_display_index" --focus
+}
+
 # Find yabai
 YABAI=$(command -v yabai || true)
 if [ -z "$YABAI" ]; then
@@ -99,12 +125,10 @@ case "$ACTION" in
         "$YABAI" -m space --balance
         ;;
     "next_screen")
-        "$YABAI" -m window --display next || "$YABAI" -m window --display first
-        "$YABAI" -m display --focus next || "$YABAI" -m display --focus first
+        move_window_to_display "next" "first"
         ;;
     "prev_screen")
-        "$YABAI" -m window --display prev || "$YABAI" -m window --display last
-        "$YABAI" -m display --focus prev || "$YABAI" -m display --focus last
+        move_window_to_display "prev" "last"
         ;;
     "float")
         "$YABAI" -m window --toggle float

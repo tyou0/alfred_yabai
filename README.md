@@ -15,7 +15,15 @@ A premium, high-performance Alfred workflow for advanced window management on ma
 
 ## 🚀 Requirements & Setup
 
-Importing the Alfred workflow is not enough on a new Mac. The workflow only sends commands to a running `yabai` service; it does not install `yabai`, start the service, or grant macOS permissions.
+On a new Mac, the fastest path is:
+
+```bash
+./install.sh
+```
+
+That script installs or reuses `yabai`, starts or restarts the service, builds `Yabai_Window_Manager_Pro.alfredworkflow`, and opens it for Alfred import. It also opens the macOS Accessibility pane when `yabai` still needs permission.
+
+Importing the Alfred workflow by itself is not enough. The workflow only sends commands to a running `yabai` service; macOS permissions still need a manual approval step.
 
 1.  **Install yabai**:
     ```bash
@@ -103,6 +111,20 @@ Type `wm` in Alfred to trigger the fuzzy search command palette.
 ---
 
 ## 🛠️ Developer Guide
+For contributor setup in a local clone:
+
+```bash
+./install-hooks.sh
+```
+
+Or combine end-user and contributor setup in one pass:
+
+```bash
+./install.sh --dev
+```
+
+`install-hooks.sh` is developer-only. It installs the repo's `hooks/pre-commit` file into `.git/hooks/pre-commit` as a symlink, so local commits run the shell checks from the tracked hook and pick up future hook updates automatically.
+
 To create a new release:
 1. Update version in `workflow/info.plist`.
 2. Commit changes: `git add . && git commit -m "feat: new features"`.

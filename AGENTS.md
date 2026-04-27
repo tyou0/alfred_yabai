@@ -12,7 +12,7 @@ The project has no runtime dependencies beyond `bash`, `yabai`, and Alfred. JSON
 |---|---|
 | `./install.sh` | End-user setup — install/reuse `yabai`, start service, package workflow, and open it for Alfred import |
 | `./deploy.sh` | Package `workflow/` into `Yabai_Window_Manager_Pro.alfredworkflow` zip |
-| `./release.sh` | Deploy + create GitHub release with auto-generated changelog (requires `gh` CLI) |
+| `./release.sh` | Deploy + create GitHub release with auto-generated changelog (uses `gh` or `gmt`) |
 | `./install-hooks.sh` | Developer setup — install the tracked pre-commit hook into `.git/hooks/` |
 | `bash -n workflow/execute.sh` | Syntax-check a script |
 | `bash -n workflow/wm.sh` | Syntax-check the Alfred Script Filter |
@@ -98,7 +98,7 @@ Use sparingly and only when absolutely necessary.
 | `workflow/icon.svg` | Workflow icon (vector) |
 | `deploy.sh` | Build packaging — zips `workflow/` into `.alfredworkflow` |
 | `install.sh` | End-user installer — installs/reuses `yabai`, starts service, packages workflow, and opens Alfred import |
-| `release.sh` | GitHub release automation — requires `gh` CLI |
+| `release.sh` | GitHub release automation — uses `gh` when available, or `gmt` as fallback |
 | `install-hooks.sh` | Developer helper — symlinks the tracked pre-commit hook into `.git/hooks/` |
 | `hooks/pre-commit` | Pre-commit hook definition for linting and formatting |
 | `AGENTS.md` | This file — guidance for agentic coding tools |

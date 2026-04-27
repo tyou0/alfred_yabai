@@ -5,12 +5,66 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$SCRIPT_DIR"
 WORKFLOW_INFO="$PROJECT_DIR/workflow/info.plist"
+README_FILE="$PROJECT_DIR/README.md"
 EXPORT_NAME="Yabai_Window_Manager_Pro.alfredworkflow"
 EXPORT_PATH="$PROJECT_DIR/$EXPORT_NAME"
+MAIN_BRANCH="${MAIN_BRANCH:-main}"
+REMOTE="${RELEASE_REMOTE:-origin}"
+BUMP_TYPE="patch"
+REQUESTED_CLI=""
 
 usage() {
-    echo "Usage: ./release.sh [gh|gmt]"
-    echo "Set RELEASE_CLI=gh or RELEASE_CLI=gmt to choose the release tool without an argument."
+    cat <<EOF
+Usage: ./release.sh [--major|--minor|--patch] [gh|gmt]
+
+Version bump:
+  --patch    Bump 0.0.1 (default)
+  --minor    Bump 0.1.0 and reset patch to 0
+  --major    Bump 1.0.0 and reset minor/patch to 0
+
+Release tool:
+  gh|gmt     Force a release CLI
+
+Environment:
+  RELEASE_CLI=gh|gmt       Choose the release tool without an argument
+  MAIN_BRANCH=main         Branch to merge into before tagging
+  RELEASE_REMOTE=origin    Remote to push main and the tag to
+EOF
+}
+
+parse_args() {
+    local seen_bump=""
+
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            --major|--minor|--patch)
+                if [ -n "$seen_bump" ]; then
+                    echo "❌ Error: Choose only one version bump flag." >&2
+                    usage >&2
+                    exit 1
+                fi
+                BUMP_TYPE="${1#--}"
+                seen_bump="yes"
+                ;;
+            gh|gmt)
+                if [ -n "$REQUESTED_CLI" ]; then
+                    echo "❌ Error: Choose only one release CLI." >&2
+                    usage >&2
+                    exit 1
+                fi
+                REQUESTED_CLI="$1"
+                ;;
+            -h|--help)
+                usage
+                exit 0
+                ;;
+            *)
+                usage >&2
+                exit 1
+                ;;
+        esac
+        shift
+    done
 }
 
 select_release_cli() {
@@ -50,6 +104,174 @@ select_release_cli() {
     exit 1
 }
 
+ensure_clean_worktree() {
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+        echo "❌ Error: Commit or stash tracked changes before releasing." >&2
+        git status --short >&2
+        exit 1
+    fi
+}
+
+current_branch() {
+    if ! git symbolic-ref --quiet --short HEAD; then
+        echo "❌ Error: Releases must be run from a branch, not detached HEAD." >&2
+        exit 1
+    fi
+}
+
+sync_main_from_remote() {
+    if ! git remote get-url "$REMOTE" >/dev/null 2>&1; then
+        echo "⚠️  Remote '$REMOTE' not found; skipping remote sync."
+        return
+    fi
+
+    echo "🔄 Syncing $MAIN_BRANCH from $REMOTE..."
+    git fetch "$REMOTE" "$MAIN_BRANCH"
+
+    if git rev-parse --verify "$REMOTE/$MAIN_BRANCH" >/dev/null 2>&1; then
+        git merge --ff-only "$REMOTE/$MAIN_BRANCH"
+    fi
+}
+
+read_version() {
+    awk '
+        /<key>version<\/key>/ {
+            getline
+            if ($0 ~ /<string>[0-9]+\.[0-9]+\.[0-9]+<\/string>/) {
+                gsub(/.*<string>|<\/string>.*/, "")
+                print
+                exit
+            }
+        }
+    ' "$WORKFLOW_INFO"
+}
+
+bump_version() {
+    local version="$1"
+    local major=""
+    local minor=""
+    local patch=""
+
+    if [[ ! "$version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+        echo "❌ Error: Unsupported version format '$version'. Expected MAJOR.MINOR.PATCH." >&2
+        exit 1
+    fi
+
+    major="${BASH_REMATCH[1]}"
+    minor="${BASH_REMATCH[2]}"
+    patch="${BASH_REMATCH[3]}"
+
+    case "$BUMP_TYPE" in
+        major)
+            major=$((major + 1))
+            minor=0
+            patch=0
+            ;;
+        minor)
+            minor=$((minor + 1))
+            patch=0
+            ;;
+        patch)
+            patch=$((patch + 1))
+            ;;
+        *)
+            echo "❌ Error: Unknown bump type '$BUMP_TYPE'." >&2
+            exit 1
+            ;;
+    esac
+
+    echo "$major.$minor.$patch"
+}
+
+update_version_files() {
+    local old_version="$1"
+    local new_version="$2"
+
+    echo "📝 Bumping version $old_version -> $new_version..."
+    OLD_VERSION="$old_version" NEW_VERSION="$new_version" perl -0pi -e '
+        s{(<key>version</key>\s*<string>)\Q$ENV{OLD_VERSION}\E(</string>)}{$1$ENV{NEW_VERSION}$2};
+        s{Yabai Window Manager Pro \(v\Q$ENV{OLD_VERSION}\E\)}{Yabai Window Manager Pro (v$ENV{NEW_VERSION})}g;
+    ' "$WORKFLOW_INFO"
+
+    if [ -f "$README_FILE" ]; then
+        OLD_VERSION="$old_version" NEW_VERSION="$new_version" perl -0pi -e '
+            s{version-\Q$ENV{OLD_VERSION}\E-blue}{version-$ENV{NEW_VERSION}-blue}g;
+            s{Yabai Window Manager Pro \(v\Q$ENV{OLD_VERSION}\E\)}{Yabai Window Manager Pro (v$ENV{NEW_VERSION})}g;
+        ' "$README_FILE"
+    fi
+}
+
+commit_version_bump() {
+    git add "$WORKFLOW_INFO"
+
+    if [ -f "$README_FILE" ]; then
+        git add "$README_FILE"
+    fi
+
+    if git diff --cached --quiet; then
+        echo "❌ Error: Version bump did not change any tracked files." >&2
+        exit 1
+    fi
+
+    git commit -m "chore: release $TAG"
+}
+
+ensure_tag_available() {
+    if git rev-parse "$TAG" >/dev/null 2>&1; then
+        echo "❌ Error: Tag $TAG already exists locally." >&2
+        exit 1
+    fi
+
+    if git remote get-url "$REMOTE" >/dev/null 2>&1 && git ls-remote --exit-code --tags "$REMOTE" "refs/tags/$TAG" >/dev/null 2>&1; then
+        echo "❌ Error: Tag $TAG already exists on $REMOTE." >&2
+        exit 1
+    fi
+}
+
+merge_release_branch_to_main() {
+    local release_branch="$1"
+
+    if [ "$release_branch" = "$MAIN_BRANCH" ]; then
+        echo "✅ Already on $MAIN_BRANCH; release commit is on the target branch."
+        return
+    fi
+
+    echo "🔀 Merging $release_branch into $MAIN_BRANCH..."
+    git checkout "$MAIN_BRANCH"
+    sync_main_from_remote
+    git merge --no-edit "$release_branch"
+}
+
+push_main_and_tag() {
+    if ! git remote get-url "$REMOTE" >/dev/null 2>&1; then
+        echo "❌ Error: Remote '$REMOTE' not found. Cannot push $MAIN_BRANCH or $TAG." >&2
+        exit 1
+    fi
+
+    echo "⬆️  Pushing $MAIN_BRANCH and $TAG to $REMOTE..."
+    git push "$REMOTE" "$MAIN_BRANCH"
+    git push "$REMOTE" "$TAG"
+}
+
+generate_release_notes() {
+    local last_tag="$1"
+    local changelog=""
+
+    if [ -n "$last_tag" ]; then
+        echo "📝 Generating changelog since $last_tag..."
+        changelog=$(git log "$last_tag..$TAG" --pretty=format:"* %s")
+        RELEASE_NOTES=$(printf "## Release %s\n\n### Changes since %s\n%s" "$TAG" "$last_tag" "$changelog")
+    else
+        echo "📝 Generating initial changelog..."
+        changelog=$(git log "$TAG" --pretty=format:"* %s")
+        RELEASE_NOTES=$(printf "## Release %s\n\n### Changes\n%s" "$TAG" "$changelog")
+    fi
+
+    if [ -z "$changelog" ]; then
+        RELEASE_NOTES=$(printf "## Release %s\n\n### Changes\nMaintenance release." "$TAG")
+    fi
+}
+
 create_release_with_gh() {
     echo "🚀 Creating GitHub release $TAG with gh..."
     if gh release create "$TAG" "$EXPORT_PATH" \
@@ -87,23 +309,36 @@ create_release_with_gmt() {
     fi
 }
 
-if [ "$#" -gt 1 ]; then
-    usage >&2
-    exit 1
+parse_args "$@"
+
+RELEASE_CLI=$(select_release_cli "$REQUESTED_CLI")
+ensure_clean_worktree
+RELEASE_BRANCH=$(current_branch)
+
+if [ "$RELEASE_BRANCH" = "$MAIN_BRANCH" ]; then
+    sync_main_from_remote
 fi
 
-RELEASE_CLI=$(select_release_cli "${1:-}")
-
-# Extract version from info.plist
-VERSION=$(grep -A 1 "<key>version</key>" "$WORKFLOW_INFO" | grep "<string>" | sed -E 's/.*<string>(.*)<\/string>.*/\1/')
+VERSION=$(read_version)
 
 if [ -z "$VERSION" ]; then
     echo "❌ Error: Could not find version in $WORKFLOW_INFO"
     exit 1
 fi
 
-TAG="v$VERSION"
+NEXT_VERSION=$(bump_version "$VERSION")
+TAG="v$NEXT_VERSION"
+LAST_TAG=""
+if LAST_TAG=$(git describe --tags --abbrev=0 --match "v[0-9]*" 2>/dev/null); then
+    true
+fi
+
+ensure_tag_available
+
 echo "🔖 Preparing release for $TAG with $RELEASE_CLI..."
+update_version_files "$VERSION" "$NEXT_VERSION"
+commit_version_bump
+merge_release_branch_to_main "$RELEASE_BRANCH"
 
 # Run deployment to get current artifact
 if ! ./deploy.sh; then
@@ -111,31 +346,10 @@ if ! ./deploy.sh; then
     exit 1
 fi
 
-# Check if tag already exists locally
-if git rev-parse "$TAG" &>/dev/null; then
-    echo "⚠️ Warning: Tag $TAG already exists locally."
-    # We continue, gh might handle it, or user might be re-releasing
-fi
-
-# Generate changelog from last tag
-LAST_TAG=""
-if LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null); then
-    true
-fi
-
-if [ -n "$LAST_TAG" ]; then
-    echo "📝 Generating changelog since $LAST_TAG..."
-    CHANGELOG=$(git log "$LAST_TAG..HEAD" --oneline --pretty=format:"* %s")
-else
-    echo "📝 Generating initial changelog..."
-    CHANGELOG=$(git log --oneline --pretty=format:"* %s")
-fi
-
-if [ -z "$CHANGELOG" ]; then
-    CHANGELOG="Maintenance release."
-fi
-
-RELEASE_NOTES=$(printf "## Release %s\n\n### Changes\n%s" "$TAG" "$CHANGELOG")
+echo "🏷️  Tagging $TAG..."
+git tag "$TAG"
+push_main_and_tag
+generate_release_notes "$LAST_TAG"
 
 printf "\n--- Release Notes ---\n%s\n----------------------\n\n" "$RELEASE_NOTES"
 

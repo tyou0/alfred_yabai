@@ -126,11 +126,11 @@ Or combine end-user and contributor setup in one pass:
 `install-hooks.sh` is developer-only. It installs the repo's `hooks/pre-commit` file into `.git/hooks/pre-commit` as a symlink, so local commits run the shell checks from the tracked hook and pick up future hook updates automatically.
 
 To create a new release:
-1. Update version in `workflow/info.plist`.
-2. Commit changes: `git add . && git commit -m "feat: new features"`.
-3. Run release script: `./release.sh`.
+1. Commit your feature or fix changes on a branch.
+2. Run `./release.sh` for a patch release, `./release.sh --minor`, or `./release.sh --major`.
+3. The script bumps the version, commits it, merges the release branch into `main`, tags it, pushes `main` and the tag, builds the workflow, and creates the GitHub release.
 
-`release.sh` uses `gh` when available, then falls back to `gmt`. You can force either tool with `./release.sh gh`, `./release.sh gmt`, or `RELEASE_CLI=gmt ./release.sh`. The `gh` path uploads the `.alfredworkflow` asset automatically; the `gmt` path creates release notes only because current `gmt release create` does not expose asset upload.
+`release.sh` uses `gh` when available, then falls back to `gmt`. You can force either tool with `./release.sh gh`, `./release.sh gmt`, or `RELEASE_CLI=gmt ./release.sh`. The `gh` path uploads the `.alfredworkflow` asset automatically; the `gmt` path creates release notes only because current `gmt release create` does not expose asset upload. Release notes include the commit subjects since the previous `v*` version tag.
 
 ---
 *Created with ❤️ for macOS power users.*

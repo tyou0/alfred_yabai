@@ -130,5 +130,7 @@ To create a new release:
 2. Commit changes: `git add . && git commit -m "feat: new features"`.
 3. Run release script: `./release.sh`.
 
+`release.sh` uses `gh` when available, then falls back to `gmt`. You can force either tool with `./release.sh gh`, `./release.sh gmt`, or `RELEASE_CLI=gmt ./release.sh`. The `gh` path uploads the `.alfredworkflow` asset automatically; the `gmt` path creates release notes only because current `gmt release create` does not expose asset upload.
+
 ---
 *Created with ❤️ for macOS power users.*

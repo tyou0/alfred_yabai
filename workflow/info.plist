@@ -454,7 +454,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>prev_screen</string>
+				<string>maximize</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -472,7 +472,7 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Prev Display</string>
+				<string>Full Screen</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -481,7 +481,7 @@
 			<key>version</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Screen: Previous Display</string>
+			<string>Ratio: Full Screen</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -491,7 +491,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>next_screen</string>
+				<string>focus_next</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -509,7 +509,7 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Next Display</string>
+				<string>Focus Next</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -518,7 +518,7 @@
 			<key>version</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Screen: Next Display</string>
+			<string>Navigation: Focus Next</string>
 		</dict>
 		<dict>
 			<key>config</key>

@@ -26,7 +26,7 @@ move_window_to_display() {
     local display_count
     local target_display_index
 
-    display_count=$("$YABAI" -m query --displays | awk '/"index":/ { count++ } END { print count + 0 }')
+    display_count=$("$YABAI" -m query --displays | awk '{ count += gsub(/"index":/, "&") } END { print count + 0 }')
     if [ "$display_count" -lt 2 ]; then
         fail "Only one display found. Connect another monitor before using next/previous display."
     fi
@@ -43,7 +43,8 @@ move_window_to_display() {
         fail "No target display found."
     fi
 
-    "$YABAI" -m window --display "$target_display_index" --focus
+    "$YABAI" -m window --display "$target_display_index"
+    "$YABAI" -m display --focus "$target_display_index"
 }
 
 # Find yabai
@@ -73,8 +74,11 @@ case "$ACTION" in
         "$YABAI" -m window --grid 1:2:1:0:1:1
         ;;
     "maximize")
-        # Toggle zoom-fullscreen (fill the workspace)
-        "$YABAI" -m window --grid 1:1:0:0:1:1 || "$YABAI" -m window --toggle zoom-fullscreen
+        if ! "$YABAI" -m query --windows --window | grep -q '"has-fullscreen-zoom":[[:space:]]*true'; then
+            "$YABAI" -m window --toggle windowed-fullscreen \
+                || "$YABAI" -m window --toggle zoom-fullscreen \
+                || "$YABAI" -m window --grid 1:1:0:0:1:1
+        fi
         ;;
     "center")
         "$YABAI" -m window --grid 4:4:1:1:2:2
@@ -120,8 +124,8 @@ case "$ACTION" in
         ;;
     "reset_window")
         # Comprehensive reset: un-zoom, un-float, then balance
-        "$YABAI" -m query --windows --window | grep -q '"is-zoom-fullscreen": true' && "$YABAI" -m window --toggle zoom-fullscreen
-        "$YABAI" -m query --windows --window | grep -q '"is-floating": true' && "$YABAI" -m window --toggle float
+        "$YABAI" -m query --windows --window | grep -q '"has-fullscreen-zoom":[[:space:]]*true' && "$YABAI" -m window --toggle zoom-fullscreen
+        "$YABAI" -m query --windows --window | grep -q '"is-floating":[[:space:]]*true' && "$YABAI" -m window --toggle float
         "$YABAI" -m space --balance
         ;;
     "next_screen")
@@ -168,6 +172,9 @@ case "$ACTION" in
         ;;
     "focus_down")
         "$YABAI" -m window --focus south
+        ;;
+    "focus_next")
+        "$YABAI" -m window --focus next || "$YABAI" -m window --focus first
         ;;
     "swap_left")
         "$YABAI" -m window --swap west

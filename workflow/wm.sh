@@ -38,7 +38,7 @@ fi
 # Define the options
 declare -a options=(
   "HEADER|--- RATIOS ---|Horizontal and Vertical screen splits"
-  "Maximize|maximize|Maximize focused window (fill screen)"
+  "Full Screen|maximize|Maximize focused window"
   "Center|center|Center focused window"
   "Left Half|left|Move to left half"
   "Right Half|right|Move to right half"
@@ -60,6 +60,7 @@ declare -a options=(
   "Focus Right|focus_right|Change focus to the right"
   "Focus Up|focus_up|Change focus upwards"
   "Focus Down|focus_down|Change focus downwards"
+  "Focus Next|focus_next|Change focus to the next window"
   "Swap Left|swap_left|Swap window with the one on the left"
   "Swap Right|swap_right|Swap window with the one on the right"
   "Swap Up|swap_up|Swap window with the one above"

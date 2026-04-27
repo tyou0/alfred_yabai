@@ -1,6 +1,6 @@
 # 🪟 Yabai Window Manager Pro
 
-[![Version](https://img.shields.io/badge/version-1.1.2-blue.svg)](https://github.com/tyou0/alfred_yabai/releases/latest)
+[![Version](https://img.shields.io/badge/version-1.1.3-blue.svg)](https://github.com/tyou0/alfred_yabai/releases/latest)
 [![Platform](https://img.shields.io/badge/platform-macOS-lightgrey.svg)](https://www.apple.com/macos/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 

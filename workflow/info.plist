@@ -7,7 +7,7 @@
 	<key>category</key>
 	<string>Tools</string>
 	<key>version</key>
-	<string>1.1.2</string>
+	<string>1.1.3</string>
 	<key>connections</key>
 	<dict>
 		<key>HK_LEFT</key>
@@ -1413,7 +1413,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Yabai Window Manager Pro (v1.1.2)
+	<string># Yabai Window Manager Pro (v1.1.3)
 
 A high-performance window management suite for macOS, powered by yabai.
 

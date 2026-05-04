@@ -491,7 +491,7 @@
 				<key>argument</key>
 				<integer>3</integer>
 				<key>argumenttext</key>
-				<string>focus_next</string>
+				<string>next_screen</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -509,7 +509,7 @@
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 				<key>customname</key>
-				<string>Focus Next</string>
+				<string>Next Display</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
@@ -518,7 +518,7 @@
 			<key>version</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Navigation: Focus Next</string>
+			<string>Screen: Next Display</string>
 		</dict>
 		<dict>
 			<key>config</key>

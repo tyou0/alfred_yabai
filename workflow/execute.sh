@@ -20,11 +20,79 @@ fail() {
     exit 1
 }
 
+json_number() {
+    local json="$1"
+    local field="$2"
+
+    printf '%s\n' "$json" \
+        | sed -n "s/.*\"$field\":[[:space:]]*\([-+]\{0,1\}[0-9][0-9]*\(\.[0-9][0-9]*\)\{0,1\}\).*/\1/p" \
+        | head -n 1
+}
+
+move_window_frame_to_display() {
+    local window_json="$1"
+    local target_display_index="$2"
+    local display_json
+    local window_id
+    local window_width
+    local window_height
+    local display_x
+    local display_y
+    local display_width
+    local display_height
+    local target_position
+    local target_x
+    local target_y
+
+    display_json=$("$YABAI" -m query --displays index,frame --display "$target_display_index")
+    window_id=$(json_number "$window_json" "id")
+    window_width=$(json_number "$window_json" "w")
+    window_height=$(json_number "$window_json" "h")
+    display_x=$(json_number "$display_json" "x")
+    display_y=$(json_number "$display_json" "y")
+    display_width=$(json_number "$display_json" "w")
+    display_height=$(json_number "$display_json" "h")
+
+    if [ -z "$window_id" ] || [ -z "$window_width" ] || [ -z "$window_height" ] \
+        || [ -z "$display_x" ] || [ -z "$display_y" ] \
+        || [ -z "$display_width" ] || [ -z "$display_height" ]; then
+        fail "Could not determine window or display geometry for display move."
+    fi
+
+    target_position=$(awk \
+        -v display_x="$display_x" \
+        -v display_y="$display_y" \
+        -v display_width="$display_width" \
+        -v display_height="$display_height" \
+        -v window_width="$window_width" \
+        -v window_height="$window_height" \
+        'BEGIN {
+            target_x = display_x + ((display_width - window_width) / 2)
+            target_y = display_y + ((display_height - window_height) / 2)
+
+            if (target_x < display_x) {
+                target_x = display_x
+            }
+            if (target_y < display_y) {
+                target_y = display_y
+            }
+
+            printf "%.0f:%.0f\n", target_x, target_y
+        }')
+
+    IFS=':' read -r target_x target_y <<< "$target_position"
+    "$YABAI" -m window "$window_id" --move "abs:$target_x:$target_y"
+}
+
 move_window_to_display() {
     local target_display="$1"
     local fallback_display="$2"
     local display_count
     local target_display_index
+    local focused_window_json
+    local focused_window_id
+    local moved_window_json
+    local moved_display_index
 
     display_count=$("$YABAI" -m query --displays | awk '{ count += gsub(/"index":/, "&") } END { print count + 0 }')
     if [ "$display_count" -lt 2 ]; then
@@ -43,8 +111,31 @@ move_window_to_display() {
         fail "No target display found."
     fi
 
-    "$YABAI" -m window --display "$target_display_index"
+    focused_window_json=$("$YABAI" -m query --windows id,display,frame --window)
+    focused_window_id=$(json_number "$focused_window_json" "id")
+
+    if [ -z "$focused_window_id" ]; then
+        fail "No focused window found to move."
+    fi
+
+    if "$YABAI" -m window --display "$target_display_index"; then
+        moved_window_json=$("$YABAI" -m query --windows display --window "$focused_window_id")
+        moved_display_index=$(json_number "$moved_window_json" "display")
+        if [ "$moved_display_index" != "$target_display_index" ]; then
+            move_window_frame_to_display "$focused_window_json" "$target_display_index"
+        fi
+    else
+        move_window_frame_to_display "$focused_window_json" "$target_display_index"
+    fi
+
+    moved_window_json=$("$YABAI" -m query --windows display --window "$focused_window_id")
+    moved_display_index=$(json_number "$moved_window_json" "display")
+    if [ "$moved_display_index" != "$target_display_index" ]; then
+        fail "Could not move focused window to display $target_display_index."
+    fi
+
     "$YABAI" -m display --focus "$target_display_index"
+    "$YABAI" -m window "$focused_window_id" --focus || true
 }
 
 # Find yabai
